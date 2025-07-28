@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday Hasi 🎉</title>
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #ffccff);
+    color: #4a0033;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 50px 20px 20px;
+  }
+  h1 {
+    font-size: 3.2rem;
+    color: #d6336c;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #ff66b2; }
+    to { text-shadow: 0 0 20px #ff1a75; }
+  }
+
+  /* Countdown */
+  #countdown {
+    font-size: 1.4rem;
+    margin-top: 8px;
+    color: #a30052;
+  }
+
+  /* Slideshow */
+  #slideshow {
+    width: 90vw;
+    max-width: 600px;
+    height: 360px;
+    margin: 40px auto;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 102, 178, 0.4);
+    overflow: hidden;
+    position: relative;
+  }
+  #slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    position: absolute;
+    top: 0; left: 0;
+  }
+  #slideshow img.active {
+    display: block;
+    animation: fadein 1.5s;
+  }
+  @keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  /* Love Letter */
+  #love-letter {
+    margin: 30px auto;
+    width: 90vw;
+    max-width: 600px;
+    background: #ffe6f0cc;
+    padding: 25px 30px;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    color: #7a004a;
+    min-height: 100px;
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  /* Heart surprise */
+  #heart-container {
+    margin: 40px 0;
+  }
+  .heart {
+    font-size: 5rem;
+    color: #ff3399;
+    cursor: pointer;
+    user-select: none;
+    animation: heartbeat 1s infinite;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+  #surprise-message {
+    display: none;
+    font-size: 1.5rem;
+    color: #cc0066;
+    margin-top: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: auto;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #660033cc;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2.2rem;
+    }
+    #slideshow {
+      height: 240px;
+    }
+    #love-letter {
+      font-size: 1.1rem;
+      padding: 20px;
+    }
+    .heart {
+      font-size: 4rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Happy Birthday, Hasi! 🎉💖</h1>
+  <div id="countdown"></div>
+</header>
+
+<section id="slideshow" aria-label="Photo slideshow">
+  <!-- Add your photos here manually by editing this section -->
+  <!-- Example format below: -->
+  <!-- <img src="photos/photo1.jpg" alt="Hasi and Pasindu smiling" class="active" /> -->
+</section>
+
+<section id="love-letter" aria-live="polite"></section>
+
+<section id="heart-container">
+  <div class="heart" role="button" tabindex="0" aria-pressed="false" aria-label="Click to reveal surprise" onclick="toggleSurprise()" onkeypress="if(event.key==='Enter') toggleSurprise()">
+    ❤️
+  </div>
+  <div id="surprise-message">
+    You are my everything, my sunshine, my forever. Happy Birthday, my love! 🎂💕
+  </div>
+</section>
+
+<footer>
+  Made with ❤️ by Pasindu Akash<br />
+  Background Music: <a href="https://youtu.be/wst5My7bQHY?list=RDwst5My7bQHY" target="_blank" rel="noopener noreferrer">Kesariya - Brahmastra</a>
+</footer>
+
+<!-- YouTube background music embed -->
+<div style="display:none">
+  <iframe id="ytplayer" type="text/html" width="0" height="0"
+    src="https://www.youtube.com/embed/wst5My7bQHY?autoplay=1&loop=1&playlist=wst5My7bQHY&controls=0&mute=0&enablejsapi=1&modestbranding=1"
+    frameborder="0" allow="autoplay" allowfullscreen></iframe>
+</div>
+
+<script>
+  // Countdown from 11th September 2023
+  function updateCountdown() {
+    const startDate = new Date('2023-09-11T00:00:00');
+    const now = new Date();
+    const diff = now - startDate;
+
+    if (diff < 0) {
+      document.getElementById('countdown').textContent = "Counting down to our journey together...";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('countdown').textContent =
+      `We've been together for ${days} days, ${hours}h ${minutes}m ${seconds}s ❤️`;
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Photo slideshow logic
+  const slideshowImages = document.querySelectorAll('#slideshow img');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    slideshowImages.forEach((img, i) => {
+      img.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextSlide() {
+    if (slideshowImages.length === 0) return;
+    currentSlide = (currentSlide + 1) % slideshowImages.length;
+    showSlide(currentSlide);
+  }
+
+  setInterval(nextSlide, 4000);
+
+  // Typewriter effect for love letter
+  const loveLetterText = "I'm so lucky to have you in my life. I love you and happy birthday my love.";
+  const loveLetterEl = document.getElementById('love-letter');
+  let idx = 0;
+
+  function typeWriter() {
+    if (idx < loveLetterText.length) {
+      loveLetterEl.textContent += loveLetterText.charAt(idx);
+      idx++;
+      setTimeout(typeWriter, 70);
+    }
+  }
+  typeWriter();
+
+  // Heart surprise toggle
+  function toggleSurprise() {
+    const msg = document.getElementById('surprise-message');
+    const heart = document.querySelector('.heart');
+    const isVisible = msg.style.display === 'block';
+
+    msg.style.display = isVisible ? 'none' : 'block';
+    heart.setAttribute('aria-pressed', !isVisible);
+  }
+</script>
+
+</body>
+</html>
